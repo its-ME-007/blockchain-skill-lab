@@ -1,0 +1,9 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="100" fill="#627EEA"/>
+  <path d="M100 30L99 33.5V123.5L100 124.5L145 99.5L100 30Z" fill="#C0CBF6"/>
+  <path d="M100 30L55 99.5L100 124.5V82V30Z" fill="#8198EE"/>
+  <path d="M100 133L99.5 133.6V166.4L100 167.7L145 108L100 133Z" fill="#C0CBF6"/>
+  <path d="M100 167.7V133L55 108L100 167.7Z" fill="#8198EE"/>
+  <path d="M100 124.5L145 99.5L100 82V124.5Z" fill="#62689F"/>
+  <path d="M55 99.5L100 124.5V82L55 99.5Z" fill="#454A75"/>
+</svg>
