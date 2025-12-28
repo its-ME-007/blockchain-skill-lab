@@ -8,9 +8,7 @@ import { useState } from 'react'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
+  whileInView: { opacity: 1, y: 0 }
 }
 
 const staggerContainer = {
@@ -54,6 +52,8 @@ export default function Session1() {
         <motion.div
           className="mb-20 p-8 glass-effect rounded-3xl border-l-4 border-blockchain-cyan"
           {...fadeInUp}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-blockchain-cyan/20 rounded-xl flex items-center justify-center">
@@ -68,7 +68,7 @@ export default function Session1() {
         </motion.div>
 
         {/* Section 1: Introduction */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-blue to-blockchain-purple rounded-2xl flex items-center justify-center">
               <Database size={32} />
@@ -125,7 +125,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 2: Core Principles */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-purple to-blockchain-cyan rounded-2xl flex items-center justify-center">
               <Layers size={32} />
@@ -172,7 +172,10 @@ export default function Session1() {
               <motion.div
                 key={i}
                 className="p-6 glass-effect rounded-2xl group hover:bg-white/10 transition-all"
-                variants={fadeInUp}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
                 whileHover={{ y: -5 }}
               >
                 <div className={`w-12 h-12 bg-gradient-to-br ${principle.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -186,7 +189,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 3: Blockchain Architecture */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-cyan to-blockchain-blue rounded-2xl flex items-center justify-center">
               <Link2 size={32} />
@@ -277,7 +280,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 4: Immutability */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-purple to-blockchain-cyan rounded-2xl flex items-center justify-center">
               <Lock size={32} />
@@ -327,7 +330,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 5: Cryptographic Hashing */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-cyan to-blockchain-blue rounded-2xl flex items-center justify-center">
               <Hash size={32} />
@@ -377,7 +380,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 6: Merkle Trees */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center gap-4 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-blockchain-blue to-blockchain-purple rounded-2xl flex items-center justify-center">
               <FileText size={32} />
@@ -432,7 +435,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Section 8: Public vs Private */}
-        <motion.section className="mb-20" {...fadeInUp}>
+        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <h2 className="text-3xl font-bold mb-8">
             <span className="text-blockchain-cyan">08</span> Public vs Private Blockchains
           </h2>
@@ -485,7 +488,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Session Takeaways */}
-        <motion.section className="mb-12" {...fadeInUp}>
+        <motion.section className="mb-12" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="p-8 glass-effect rounded-3xl border-2 border-blockchain-cyan/50">
             <h2 className="text-3xl font-bold mb-6 text-center">
               ✅ Session 1 <span className="gradient-text">Takeaways</span>
@@ -512,7 +515,7 @@ export default function Session1() {
         </motion.section>
 
         {/* Navigation to Session 2 */}
-        <motion.div className="text-center" {...fadeInUp}>
+        <motion.div className="text-center" {...fadeInUp} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <Link href="/session-2">
             <motion.button
               className="px-8 py-4 bg-gradient-to-r from-blockchain-purple to-blockchain-cyan rounded-full font-semibold text-lg flex items-center gap-2 mx-auto hover:shadow-2xl hover:shadow-blockchain-purple/50 transition-all"

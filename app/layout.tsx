@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Blockchain Learning - 5-Day Program',
+  title: 'Blockchain Skilllab',
   description: 'Master blockchain fundamentals through a structured 5-day program covering distributed ledgers, cryptography, and modern platforms like Ethereum, Solana, and Algorand',
 }
 

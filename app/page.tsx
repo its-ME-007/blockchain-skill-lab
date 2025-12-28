@@ -62,7 +62,7 @@ export default function Home() {
 
             <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
               Master the fundamentals of <span className="text-blockchain-cyan font-semibold">distributed ledgers</span>, 
-              understand modern platforms, and build your blockchain expertise through a structured 5-day program.
+              understand modern platforms, and build your blockchain expertise from the ground up.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -115,7 +115,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            5-Day <span className="gradient-text">Learning Journey</span>
+            Learning <span className="gradient-text">Journey</span>
           </motion.h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
