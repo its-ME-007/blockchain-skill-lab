@@ -1,133 +1,156 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FileText, Layers, GitBranch, Database, Code, Users } from 'lucide-react'
+import { FileText, Layers, GitBranch, Terminal, Play, ArrowRight, CheckCircle2 } from 'lucide-react'
+import Link from 'next/link'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 }
 }
+
+// Custom Terminal Component to wrap the syntax highlighter
+const TerminalWindow = ({ code, title = 'script.sol' }: { code: string, title?: string }) => (
+  <div className="mt-6 mb-8 rounded-sm overflow-hidden border border-neutral-800 bg-[#050505] shadow-2xl">
+    <div className="flex items-center justify-between px-4 py-2 bg-neutral-900 border-b border-neutral-800">
+      <div className="flex gap-1.5">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+        <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
+      </div>
+      <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">{title}</span>
+    </div>
+    <div className="text-sm font-mono">
+      <SyntaxHighlighter 
+        language="solidity" 
+        style={vscDarkPlus} 
+        customStyle={{ 
+          margin: 0, 
+          padding: '1.5rem', 
+          background: '#050505', 
+          fontSize: '0.875rem',
+          lineHeight: '1.6'
+        }}
+        wrapLongLines={true}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </div>
+  </div>
+)
 
 const sections = [
   {
-    title: 'Write & Deploy Ethereum Smart Contracts',
-    icon: <FileText size={28} />,
+    title: 'Contract Deployment Cycle',
+    icon: <FileText size={18} />,
+    subtitle: 'LIFECYCLE_INIT',
     content: [
-      `Ethereum smart contracts are self-executing programs stored on the blockchain. They define rules for digital agreements and automatically enforce them.`,
-      `**Steps to write and deploy:**`,
-      `1. Install Solidity-compatible IDE (Remix IDE is most common).`,
-      `2. Write your contract with state variables, functions, events, and modifiers.`,
-      `3. Compile the contract to check for syntax and semantic errors.`,
-      `4. Deploy on a testnet (e.g., Goerli) using MetaMask or other wallets.`,
-      `5. Interact with deployed contracts through frontend or Remix console.`
+      `Ethereum smart contracts are immutable programs. Once deployed, their logic cannot be altered, only interacted with.`,
+      `**Deployment Sequence:**`,
+      `1. **Development**: Write Solidity in an IDE (Remix/Hardhat).`,
+      `2. **Compilation**: Convert high-level code to EVM Bytecode & ABI.`,
+      `3. **Signing**: Sign the deployment transaction with a wallet (EOA).`,
+      `4. **Broadcast**: Send to the network; miners/validators verify.`,
     ],
-    code: `pragma solidity ^0.8.20;
+    codeTitle: 'Counter.sol',
+    code: `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
 contract Counter {
-    uint public count;
+    uint256 public count;
+    event Incremented(uint256 newCount);
 
+    // Initializer
     constructor() {
         count = 0;
     }
 
-    function increment() public {
+    // State Modifier
+    function increment() external {
         count += 1;
-    }
-
-    function reset() public {
-        count = 0;
+        emit Incremented(count);
     }
 }`
   },
   {
-    title: 'Remix IDE & Contract Interaction',
-    icon: <Layers size={28} />,
+    title: 'Remix & Web3.js Interaction',
+    icon: <Terminal size={18} />,
+    subtitle: 'INTERFACE_LAYER',
     content: [
-      `Remix IDE is an online Solidity editor and deployment tool with an integrated environment to test smart contracts.`,
-      `**Key Features:**`,
-      `- Solidity compiler and debugger`,
-      `- Deploy to JavaScript VM, Injected Web3, or local testnets`,
-      `- Run transactions, call functions, and check emitted events`,
-      `- Real-time syntax highlighting and error detection`,
-      `- Plugin ecosystem for enhanced functionalities`
+      `Remix IDE is the standard playground for testing. For production apps, we use libraries like Web3.js or Ethers.js to bridge the frontend with the blockchain.`,
+      `**Key Interfaces:**`,
+      `- **ABI (Application Binary Interface)**: JSON that tells your app how to talk to the contract.`,
+      `- **Provider**: Connection to an Ethereum node (e.g., Infura, Alchemy).`,
+      `- **Signer**: The account paying gas for write operations.`
     ],
-    code: `// Interacting with deployed contract
-const counterContract = new web3.eth.Contract(abi, contractAddress);
+    codeTitle: 'dapp.js',
+    code: `const Web3 = require('web3');
+const contractABI = require('./CounterABI.json');
 
-async function incrementCounter() {
-    await counterContract.methods.increment().send({ from: userAddress });
-}
+// Initialize Contract Instance
+const contract = new web3.eth.Contract(
+  contractABI, 
+  '0x123...abc' // Deployed Address
+);
 
-async function getCount() {
-    return await counterContract.methods.count().call();
-}`
+// Call: Read Data (Free)
+const value = await contract.methods.count().call();
+
+// Send: Write Data (Costs Gas)
+await contract.methods.increment().send({ 
+  from: userAddress 
+});`
   },
   {
-    title: 'Student Registry / Asset Transfer Example',
-    icon: <Users size={28} />,
+    title: 'Complex Logic: Registry Pattern',
+    icon: <Layers size={18} />,
+    subtitle: 'DATA_STRUCTURES',
     content: [
-      `This example shows a smart contract for managing student records and transferring assets.`,
-      `It demonstrates mappings, structs, events, and access control in Solidity.`,
-      `**Key Concepts:**`,
-      `- **Structs**: Custom data types to store multiple related values.`,
-      `- **Mappings**: Key-value storage for fast lookups.`,
-      `- **Events**: Logging changes to monitor off-chain.`,
-      `- **Modifiers**: Reusable access rules, e.g., only admin can update records.`
+      `A practical example demonstrating standard Solidity patterns: Mappings for O(1) lookups, Structs for data grouping, and Events for indexing data off-chain.`,
+      `This pattern is foundational for Identity Systems, Token Registries, and DAOs.`
     ],
-    code: `pragma solidity ^0.8.20;
-
-contract StudentRegistry {
-    struct Student {
+    codeTitle: 'StudentRegistry.sol',
+    code: `contract Registry {
+    struct Record {
         string name;
-        uint age;
-        bool enrolled;
+        bool isActive;
     }
 
+    // O(1) Lookup Table
+    mapping(address => Record) public records;
     address public admin;
-    mapping(uint => Student) public students;
-
-    event StudentAdded(uint studentId, string name);
-    event AssetTransferred(address from, address to, uint amount);
 
     modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+        require(msg.sender == admin, "ACCESS_DENIED");
         _;
     }
 
-    constructor() {
-        admin = msg.sender;
-    }
-
-    function addStudent(uint studentId, string memory name, uint age) public onlyAdmin {
-        students[studentId] = Student(name, age, true);
-        emit StudentAdded(studentId, name);
-    }
-
-    function transferAsset(address to, uint amount) public {
-        // Example logic
-        emit AssetTransferred(msg.sender, to, amount);
+    function register(address user, string memory name) external onlyAdmin {
+        records[user] = Record(name, true);
     }
 }`
   },
   {
-    title: 'Best Practices & Security',
-    icon: <GitBranch size={28} />,
+    title: 'Security Architecture',
+    icon: <GitBranch size={18} />,
+    subtitle: 'RISK_MANAGEMENT',
     content: [
-      `Smart contract security is crucial. Once deployed, contracts cannot be easily changed.`,
-      `**Best Practices:**`,
-      `- Validate all inputs and outputs`,
-      `- Use OpenZeppelin libraries for tested implementations`,
-      `- Avoid reentrancy, integer overflow, and uninitialized storage`,
-      `- Minimize on-chain storage to reduce gas costs`,
-      `- Write unit tests and use static analysis tools before deployment`
+      `Security is not an add-on; it is architectural. A single reentrancy bug can drain millions.`,
+      `**Defense Strategy:**`,
+      `- **Checks-Effects-Interactions**: Update state *before* making external calls.`,
+      `- **Reentrancy Guards**: Mutex locks for critical functions.`,
+      `- **Access Control**: Strict ownership models.`
     ],
-    code: `// Reentrancy guard example
+    codeTitle: 'Security.sol',
+    code: `// Prevents recursive calling attacks
 bool internal locked;
 
-modifier noReentrancy() {
-    require(!locked, "No reentrancy");
+modifier nonReentrant() {
+    require(!locked, "REENTRANCY_DETECTED");
     locked = true;
     _;
     locked = false;
@@ -137,60 +160,115 @@ modifier noReentrancy() {
 
 export default function EthereumSmartContractPage() {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-200 py-16 px-6 md:px-16">
-      <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="inline-block px-4 py-2 bg-cyan-700 rounded-full mb-6">
-          <span className="font-semibold">ETHEREUM DEVELOPMENT</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
-          Ethereum Smart Contracts In-Depth
-        </h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          Explore how to write, deploy, and interact with Ethereum smart contracts, with practical examples like student registries and asset transfers. Learn security practices and advanced concepts to build production-ready contracts.
-        </p>
-      </motion.div>
-
-      <div className="space-y-12">
-        {sections.map((sec, idx) => (
-          <motion.div key={idx} className="bg-gray-800/20 rounded-3xl border border-cyan-700 p-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-4 mb-6">
-              {sec.icon}
-              <h2 className="text-3xl font-bold">{sec.title}</h2>
-            </div>
-            <div className="space-y-4 text-gray-300">
-              {sec.content.map((c, i) => (
-                <p key={i} className="whitespace-pre-line">{c}</p>
-              ))}
-              <SyntaxHighlighter language="solidity" style={oneDark} customStyle={{ borderRadius: '0.5rem' }}>
-                {sec.code}
-              </SyntaxHighlighter>
-            </div>
-          </motion.div>
-        ))}
+    <div className="relative pt-24 pb-24 bg-black text-white selection:bg-blue-900 selection:text-white font-sans min-h-screen">
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]" 
+         style={{ 
+           backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', 
+           backgroundSize: '40px 40px' 
+         }}>
       </div>
 
-      <motion.div
-        className="mt-16 p-8 bg-cyan-800/20 rounded-3xl border border-cyan-600"
-        {...fadeInUp}
-      >
-        <h2 className="text-3xl font-bold mb-6 text-center">✅ Key Takeaways</h2>
-        <ul className="list-disc list-inside space-y-3 text-gray-200">
-          <li>Ethereum contracts enforce rules programmatically and live on-chain.</li>
-          <li>Remix IDE enables coding, compiling, deploying, and interacting with contracts efficiently.</li>
-          <li>Structs, mappings, events, and modifiers provide structure and control for contract logic.</li>
-          <li>Security best practices are essential to prevent hacks and vulnerabilities.</li>
-          <li>Code reusability through libraries and OpenZeppelin improves reliability.</li>
-        </ul>
-      </motion.div>
+      <div className="relative max-w-5xl mx-auto px-6 z-10">
+        
+        {/* Header */}
+        <motion.div
+          className="mb-20"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+           <div className="flex items-center gap-3 mb-6">
+            <div className="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-400 text-xs font-mono uppercase tracking-widest rounded-sm">
+              Session 02.3
+            </div>
+            <div className="h-px bg-neutral-800 flex-1"></div>
+            <span className="text-neutral-500 text-xs font-mono uppercase tracking-widest">
+              Implementation
+            </span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-[0.9]">
+            CONTRACT
+            <br />
+            DEVELOPMENT.
+          </h1>
+
+          <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed font-light border-l border-neutral-800 pl-6">
+            From architecture to deployment. A technical walkthrough of writing, compiling, and interacting with production-grade Ethereum smart contracts.
+          </p>
+        </motion.div>
+
+        {/* Content Sections */}
+        <div className="space-y-12">
+          {sections.map((sec, idx) => (
+            <motion.div 
+              key={idx} 
+              className="group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {/* Section Header */}
+              <div className="flex items-center gap-4 mb-6 border-b border-neutral-800 pb-4">
+                <div className="p-2 bg-neutral-900 border border-neutral-800 text-blue-500 rounded-sm">
+                  {sec.icon}
+                </div>
+                <div>
+                   <span className="text-[10px] font-mono font-bold text-neutral-500 uppercase tracking-widest block mb-1">
+                    {sec.subtitle}
+                   </span>
+                   <h2 className="text-2xl font-bold text-white tracking-tight">{sec.title}</h2>
+                </div>
+              </div>
+
+              {/* Layout: Text + Code */}
+              <div className="grid md:grid-cols-1 gap-6">
+                <div className="space-y-4 text-neutral-400 leading-relaxed max-w-3xl">
+                  {sec.content.map((c, i) => (
+                    <div key={i} dangerouslySetInnerHTML={{ 
+                      __html: c.replace(/\*\*(.*?)\*\*/g, '<span class="text-white font-medium">$1</span>') 
+                    }} />
+                  ))}
+                </div>
+                
+                <TerminalWindow code={sec.code} title={sec.codeTitle} />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Key Takeaways - System Check */}
+        <motion.section 
+          className="mt-24 pt-12 border-t border-neutral-800"
+          {...fadeInUp}
+        >
+          <div className="bg-[#0A0A0A] border border-neutral-800 rounded-sm p-8">
+            <div className="flex items-center gap-3 mb-8">
+              <Play className="text-blue-500 fill-blue-500" size={16} />
+              <h2 className="text-lg font-bold font-mono uppercase tracking-widest text-white">
+                Deployment Checklist
+              </h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                'Compile contracts to check for syntax errors (ABI generation).',
+                'Ensure all state variables are packed to optimize gas.',
+                'Verify modifiers are applied to restricted functions.',
+                'Use Reentrancy Guards on all functions handling ETH transfer.',
+                'Test interaction scripts on a local fork before mainnet.'
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-neutral-600 group-hover:text-blue-500 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-neutral-300 font-mono leading-snug">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+      </div>
     </div>
   )
 }

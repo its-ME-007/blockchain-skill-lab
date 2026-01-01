@@ -6,311 +6,239 @@ import {
   Cpu,
   Fuel,
   FileCode,
-  Users,
-  ChevronRight,
-  Layers,
-  Hash,
-  Shield
+  ArrowRight,
+  Terminal,
+  Database,
+  CheckCircle2
 } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
 import { ChainVisual } from '@/components/AnimatedVisuals'
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 }
-}
-
-const staggerContainer = {
-  initial: {},
-  whileInView: {
-    transition: { staggerChildren: 0.1 }
-  }
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
 }
 
 export default function SessionEthereumArchitecture() {
-  const [expanded, setExpanded] = useState<number | null>(null)
-
   return (
-    <div className="relative pt-24 pb-16">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+    <div className="relative pt-24 pb-24 bg-black text-white selection:bg-blue-900 selection:text-white font-sans">
+      
+      {/* Background Tech Grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]" 
+         style={{ 
+           backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', 
+           backgroundSize: '40px 40px' 
+         }}>
+      </div>
 
-      <div className="relative max-w-6xl mx-auto px-4">
+      <div className="relative max-w-5xl mx-auto px-6 z-10">
+        
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -30 }}
+          className="mb-20"
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="inline-block px-4 py-2 glass-effect rounded-full mb-6">
-            <span className="text-blockchain-cyan font-semibold">SESSION 2</span>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-400 text-xs font-mono uppercase tracking-widest rounded-sm">
+              Session 02
+            </div>
+            <div className="h-px bg-neutral-800 flex-1"></div>
+            <span className="text-neutral-500 text-xs font-mono uppercase tracking-widest">
+              Protocol Level
+            </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="gradient-text">Ethereum</span><br />
-            Architecture
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-[0.9]">
+            ETHEREUM
+            <br />
+            ARCHITECTURE.
           </h1>
 
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A deep technical exploration of Ethereum’s network design, execution
-            model, gas economics, and smart contract architecture.
+          <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed font-light border-l border-neutral-800 pl-6">
+            A deep technical exploration of Ethereum’s network design, execution model, gas economics, and state management.
           </p>
         </motion.div>
 
-        {/* Session Goal */}
+        {/* Session Goal - Blueprint Box */}
         <motion.div
-          className="mb-20 p-8 glass-effect rounded-3xl border-l-4 border-blockchain-cyan"
+          className="mb-24 bg-[#0A0A0A] border border-neutral-800 p-8 rounded-sm"
           {...fadeInUp}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl font-bold mb-4">Session Goal</h2>
-          <p className="text-lg text-gray-300 leading-relaxed">
-            Understand how Ethereum operates as a decentralized world computer —
-            from peer-to-peer networking and execution to gas economics and
-            programmable state.
-          </p>
+          <div className="flex items-start gap-4">
+            <div className="p-2 bg-neutral-900 border border-neutral-800 rounded-sm">
+              <Terminal size={20} className="text-blue-500" />
+            </div>
+            <div>
+              <h2 className="text-sm font-bold font-mono text-blue-500 uppercase tracking-widest mb-2">
+                Objective
+              </h2>
+              <p className="text-neutral-300 leading-relaxed">
+                Deconstruct the Ethereum stack: understanding how nodes maintain global state via peer-to-peer communication, the deterministic nature of the EVM, and how gas fees regulate computational resources.
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         {/* 1. Ethereum Network */}
-        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blockchain-blue to-blockchain-cyan rounded-2xl flex items-center justify-center">
-              <Network size={32} />
-            </div>
-            <div>
-              <span className="text-blockchain-cyan text-sm font-semibold">01</span>
-              <h2 className="text-3xl font-bold">Ethereum Network</h2>
-            </div>
+        <motion.section className="mb-24 group" {...fadeInUp} viewport={{ once: true }}>
+          <div className="flex items-baseline gap-4 mb-8 border-b border-neutral-800 pb-4">
+            <span className="text-4xl font-mono font-bold text-neutral-800 group-hover:text-blue-900 transition-colors">01</span>
+            <h2 className="text-2xl font-bold tracking-tight">The Network Layer</h2>
           </div>
 
-          <div className="p-8 glass-effect rounded-2xl">
-            <p className="text-gray-300 leading-relaxed mb-6">
-              Ethereum is a <span className="font-semibold text-white">peer-to-peer
-              network</span> of nodes that collectively maintain a shared global
-              state. Nodes communicate using the devp2p protocol and exchange
-              blocks, transactions, and state data.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                'Execution clients (Geth, Nethermind)',
-                'Consensus clients (Prysm, Lighthouse)',
-                'Validators replacing miners post-Merge'
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-4 bg-white/5 rounded-xl text-sm text-gray-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  {item}
-                </motion.div>
-              ))}
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <p className="text-neutral-400 leading-relaxed mb-6">
+                Ethereum operates as a <strong className="text-white font-medium">peer-to-peer network</strong> of nodes. Unlike client-server architectures, every full node stores the complete history and state of the blockchain.
+              </p>
+              
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Execution Clients (Geth, Nethermind)',
+                  'Consensus Clients (Prysm, Lighthouse)',
+                  'P2P Communication (devp2p)'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-neutral-300 font-mono">
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-sm"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="my-8 p-6 bg-blockchain-blue/5 rounded-xl border border-blockchain-blue/20">
-              <ChainVisual />
-              <p className="text-xs text-center text-gray-400 mt-4">
-                Ethereum nodes synchronizing blocks and state
+            {/* Visual Container */}
+            <div className="bg-[#050505] border border-neutral-800 rounded-sm p-6 flex flex-col items-center justify-center relative overflow-hidden">
+              <div className="absolute top-2 right-2 text-[10px] font-mono text-neutral-600">FIG 1.0</div>
+              <div className="w-full opacity-80">
+                <ChainVisual />
+              </div>
+              <p className="text-[10px] text-neutral-500 font-mono mt-4 uppercase tracking-wider">
+                Block Propagation & State Sync
               </p>
             </div>
           </div>
         </motion.section>
 
         {/* 2. EVM */}
-        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blockchain-purple to-blockchain-blue rounded-2xl flex items-center justify-center">
-              <Cpu size={32} />
-            </div>
-            <div>
-              <span className="text-blockchain-purple text-sm font-semibold">02</span>
-              <h2 className="text-3xl font-bold">Ethereum Virtual Machine (EVM)</h2>
-            </div>
+        <motion.section className="mb-24 group" {...fadeInUp} viewport={{ once: true }}>
+          <div className="flex items-baseline gap-4 mb-8 border-b border-neutral-800 pb-4">
+            <span className="text-4xl font-mono font-bold text-neutral-800 group-hover:text-blue-900 transition-colors">02</span>
+            <h2 className="text-2xl font-bold tracking-tight">Ethereum Virtual Machine (EVM)</h2>
           </div>
 
-          <div className="p-8 glass-effect rounded-2xl">
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              The <span className="font-semibold text-white">EVM</span> is a
-              deterministic, stack-based virtual machine that executes smart
-              contract bytecode identically on every Ethereum node.
-            </p>
+          <div className="grid md:grid-cols-2 gap-6">
+             <div className="md:col-span-2 mb-4">
+                <p className="text-neutral-400 leading-relaxed max-w-3xl">
+                  The EVM is a <strong className="text-white font-medium">quasi-Turing-complete</strong> state machine. It is stack-based, meaning it operates on a Last-In-First-Out basis with a word size of 256 bits to facilitate native hashing and elliptic curve operations.
+                </p>
+             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                {
-                  title: 'Stack-based Execution',
-                  desc: '256-bit word stack with strict opcode semantics'
-                },
-                {
-                  title: 'Determinism',
-                  desc: 'Same input always produces the same output across nodes'
-                },
-                {
-                  title: 'Isolated Execution',
-                  desc: 'Contracts cannot access external system resources'
-                },
-                {
-                  title: 'Opcode Gas Costs',
-                  desc: 'Each opcode has a predefined gas cost'
-                }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-5 bg-white/5 rounded-xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="font-bold mb-2">{item.title}</h4>
-                  <p className="text-sm text-gray-300">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-
-        {/* 3. Gas Model & Transaction Lifecycle */}
-        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blockchain-cyan to-blockchain-purple rounded-2xl flex items-center justify-center">
-              <Fuel size={32} />
-            </div>
-            <div>
-              <span className="text-blockchain-cyan text-sm font-semibold">03</span>
-              <h2 className="text-3xl font-bold">Gas Model & Transaction Lifecycle</h2>
-            </div>
-          </div>
-
-          <div className="p-8 glass-effect rounded-2xl">
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Gas is Ethereum’s economic mechanism that limits computation,
-              prevents abuse, and compensates validators.
-            </p>
-
-            <div className="space-y-4">
-              {[
-                'Transaction created and signed by user',
-                'Broadcast to mempool',
-                'Validator selects transaction',
-                'EVM execution consumes gas',
-                'State updated and block finalized'
-              ].map((step, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-center gap-3 p-4 bg-white/5 rounded-xl"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="w-8 h-8 bg-blockchain-cyan/30 rounded-lg flex items-center justify-center">
-                    <span className="text-sm font-bold">{i + 1}</span>
+            {[
+              {
+                title: 'Stack Architecture',
+                desc: '256-bit word size. 1024 item depth limit. Strictly deterministic.',
+                icon: <Database size={18} />
+              },
+              {
+                title: 'Isolated Sandbox',
+                desc: 'Code runs with no access to network, filesystem, or other processes.',
+                icon: <Cpu size={18} />
+              },
+              {
+                title: 'Global State',
+                desc: 'A large data structure (Merkle Patricia Trie) holding all accounts.',
+                icon: <Network size={18} />
+              },
+              {
+                title: 'Bytecode Execution',
+                desc: 'High-level Solidity compiles down to low-level Opcodes.',
+                icon: <FileCode size={18} />
+              }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 bg-[#0A0A0A] border border-neutral-800 hover:border-blue-800 transition-colors rounded-sm group/card"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <h4 className="font-bold text-white group-hover/card:text-blue-400 transition-colors">{item.title}</h4>
+                  <div className="text-neutral-600 group-hover/card:text-blue-500 transition-colors">
+                    {item.icon}
                   </div>
-                  <span className="text-gray-300">{step}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-6 p-4 bg-blockchain-cyan/10 rounded-xl">
-              <p className="text-sm text-center">
-                Base fee is burned • Priority fee incentivizes validators
-              </p>
-            </div>
+                </div>
+                <p className="text-sm text-neutral-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </motion.section>
 
-        {/* 4. Smart Contracts & Accounts */}
-        <motion.section className="mb-20" {...fadeInUp} viewport={{ once: true }}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blockchain-blue to-blockchain-purple rounded-2xl flex items-center justify-center">
-              <FileCode size={32} />
-            </div>
-            <div>
-              <span className="text-blockchain-blue text-sm font-semibold">04</span>
-              <h2 className="text-3xl font-bold">Smart Contracts & Accounts</h2>
-            </div>
+        {/* 3. Gas Model */}
+        <motion.section className="mb-24 group" {...fadeInUp} viewport={{ once: true }}>
+          <div className="flex items-baseline gap-4 mb-8 border-b border-neutral-800 pb-4">
+            <span className="text-4xl font-mono font-bold text-neutral-800 group-hover:text-blue-900 transition-colors">03</span>
+            <h2 className="text-2xl font-bold tracking-tight">Gas & Economics</h2>
           </div>
 
-          <div className="p-8 glass-effect rounded-2xl">
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Ethereum uses an <span className="font-semibold text-white">account-based
-              model</span> rather than UTXOs. State is stored directly on accounts.
-            </p>
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+             <div className="flex-1">
+                <p className="text-neutral-400 mb-6">
+                  Gas is the unit that measures the amount of computational effort required to execute operations. It serves two purposes: preventing infinite loops (Halting Problem) and prioritizing market resources.
+                </p>
+                <div className="bg-neutral-900/30 p-4 border-l-2 border-blue-500">
+                  <p className="font-mono text-sm text-blue-200">
+                    Total Fee = (Base Fee + Priority Fee) × Gas Used
+                  </p>
+                </div>
+             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                {
-                  title: 'Externally Owned Accounts (EOA)',
-                  desc: 'Controlled by private keys, initiate transactions'
-                },
-                {
-                  title: 'Contract Accounts',
-                  desc: 'Contain bytecode and persistent storage'
-                },
-                {
-                  title: 'Smart Contracts',
-                  desc: 'Deterministic programs executed by the EVM'
-                },
-                {
-                  title: 'Global State',
-                  desc: 'Mapping of addresses to account data'
-                }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-5 bg-white/5 rounded-xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="font-bold mb-2">{item.title}</h4>
-                  <p className="text-sm text-gray-300">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+             <div className="flex-1 w-full">
+                <div className="space-y-2">
+                  {[
+                    { step: '01', text: 'User signs transaction' },
+                    { step: '02', text: 'Tx broadcast to Mempool' },
+                    { step: '03', text: 'Validator bundles Tx into Block' },
+                    { step: '04', text: 'EVM executes & state updates' },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4 p-3 border border-neutral-800 bg-[#0A0A0A]">
+                      <span className="font-mono text-xs text-neutral-600">{item.step}</span>
+                      <span className="text-sm text-neutral-300">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+             </div>
           </div>
         </motion.section>
 
-        {/* Takeaways */}
-        <motion.section className="mb-12" {...fadeInUp} viewport={{ once: true }}>
-          <div className="p-8 glass-effect rounded-3xl border-2 border-blockchain-cyan/50">
-            <h2 className="text-3xl font-bold mb-6 text-center">
-              ✅ Ethereum Architecture Takeaways
-            </h2>
+        {/* Takeaways - Checklist Style */}
+        <motion.section className="mb-16 border-t border-neutral-800 pt-16" {...fadeInUp} viewport={{ once: true }}>
+          <h2 className="text-lg font-bold font-mono uppercase tracking-widest text-neutral-500 mb-8 text-center">
+            System Check
+          </h2>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                'Ethereum is a stateful, account-based blockchain',
-                'The EVM guarantees deterministic execution',
-                'Gas aligns computation with economic cost'
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-5 bg-blockchain-cyan/10 rounded-xl text-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <p className="text-gray-200">{item}</p>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              'State relies on Account Model, not UTXO',
+              'EVM guarantees deterministic execution',
+              'Gas aligns computation with cost'
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-neutral-300 font-medium">{item}</p>
+              </div>
+            ))}
           </div>
         </motion.section>
 
         {/* Navigation */}
-        <motion.div className="text-center" {...fadeInUp} viewport={{ once: true }}>
+        <motion.div className="flex justify-center" {...fadeInUp} viewport={{ once: true }}>
           <Link href="/d2-session-2">
-            <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-blockchain-purple to-blockchain-cyan rounded-full font-semibold text-lg flex items-center gap-2 mx-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Continue to Solidity Programming
-              <ChevronRight size={20} />
-            </motion.button>
+            <button className="group relative px-8 py-4 bg-white text-black font-bold text-sm uppercase tracking-wider hover:bg-neutral-200 transition-colors flex items-center gap-3 rounded-sm">
+              <span>Next Module: Solidity</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
           </Link>
         </motion.div>
       </div>
