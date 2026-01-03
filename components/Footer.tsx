@@ -29,6 +29,7 @@ const CONTRIBUTORS = [
   { name: 'Kavin', role: 'Day 1' },
   { name: 'Ishan', role: 'Day 2' },
   { name: 'Dia Arora', role: 'Day 3', url: 'https://github.com/Dia-Arora' },
+  { name: 'Varun', role: 'Day 4', url: 'https://github.com/varunaditya27'}
 ]
 
 // --- SUB-COMPONENTS ---
