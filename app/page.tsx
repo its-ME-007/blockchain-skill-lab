@@ -38,8 +38,8 @@ const CURRICULUM_DATA = [
     title: "High Throughput",
     sessions: [
       { title: 'Fundamentals of Solana', topics: ['Proof of History', 'Sealevel', 'Account Model', 'PDAs'], link: '/d3-session-1', available: true },
-      { title: 'UTXO Model', topics: ['Bitcoin Architecture', 'Transaction Structure', 'Script System'], link: '#', available: false },
-      { title: 'Layer 2 Solutions', topics: ['Lightning Network', 'Rollups', 'Sidechains'], link: '#', available: false }
+      { title: 'Solana Development', topics: ['Tooling & CLI', 'Programs vs Accounts', 'Building & Testing'], link: '/d3-session-2', available: true },
+      { title: 'Anchor Smart Contracts', topics: ['Branches (main/final)', 'Program IDs', 'Anchor Tests', 'Deploy & Pinning'], link: '/d3-session-3', available: true }
     ],
     icon: <Zap className="w-5 h-5" />
   },

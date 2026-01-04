@@ -80,11 +80,11 @@ export default function Navbar() {
                   
                   <div className="p-1">
                     {[
-                      { day: 1, sessions: 3, available: 3, path: '/d1-session-1' },
+                      { day: 1, sessions: 3, available: 2, path: '/d1-session-1' },
                       { day: 2, sessions: 3, available: 3, path: '/d2-session-1' },
-                      { day: 3, sessions: 3, available: 0, path: '/' },
+                      { day: 3, sessions: 3, available: 3, path: '/d3-session-1' },
                       { day: 4, sessions: 3, available: 1, path: '/d4-session-1' },
-                      { day: 5, sessions: 3, available: 0, path: '/' }
+                      { day: 5, sessions: 3, available: 3, path: '/d5-session-1' }
                     ].map((item) => (
                       <Link key={item.day} href={item.path}>
                         <div className="group flex justify-between items-center p-3 hover:bg-neutral-900 transition-colors border-l-2 border-transparent hover:border-blue-600">
@@ -181,9 +181,9 @@ export default function Navbar() {
                   {[
                     { day: 1, available: true, path: '/d1-session-1' },
                     { day: 2, available: true, path: '/d2-session-1' },
-                    { day: 3, available: false, path: '/' },
+                    { day: 3, available: true, path: '/d3-session-1' },
                     { day: 4, available: true, path: '/d4-session-1' },
-                    { day: 5, available: false, path: '/' }
+                    { day: 5, available: true, path: '/d5-session-1' }
                   ].map((item) => (
                     <Link key={item.day} href={item.path} onClick={() => setIsMobileMenuOpen(false)}>
                       <div className="py-3 flex justify-between items-center text-neutral-300 hover:text-white border-b border-neutral-900">
