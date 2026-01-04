@@ -38,6 +38,23 @@ export default function Page() {
           </p>
         </motion.div>
 
+        {/* Resources Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-10"
+        >
+          <Link
+            href="https://tinyurl.com/resourcesgit"
+            target="_blank"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-900/20 border border-purple-800 text-purple-200 text-sm font-mono uppercase tracking-widest rounded-sm hover:bg-purple-900/30 transition-colors"
+          >
+            Resources & Procedure
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
         {/* Section 01: Why Ethereum Needs IPFS */}
         <Section number="01" title="The Storage Trilemma">
           <p className="text-neutral-400 mb-8 leading-relaxed">
