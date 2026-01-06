@@ -39,14 +39,14 @@ export default function Navbar() {
             {/* <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-sm text-black">
               <Terminal size={18} strokeWidth={3} />
             </div> */}
-            <Image src="/logos/rvcelogo.png" alt="Logo" width={100} height={40} className="group-hover:opacity-80 transition-opacity" />
+            <Image src="/logos/rvcelogo.png" alt="Logo" width={50} height={40} className="group-hover:opacity-80 transition-opacity" />
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
+              {/* <span className="text-lg font-bold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
                 SKILLLAB
-              </span>
-              <span className="text-[9px] font-mono text-blue-500 uppercase tracking-wider hidden lg:block">
+              </span> */}
+              {/* <span className="text-[9px] font-mono text-blue-500 uppercase tracking-wider hidden lg:block">
                 5-Day Blockchain Guide
-              </span>
+              </span> */}
             </div>
           </div>
         </Link>

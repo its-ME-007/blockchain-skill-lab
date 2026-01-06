@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Github, Twitter, Linkedin, Terminal, ArrowUpRight, Code2, Users, Heart } from 'lucide-react'
+import Image from 'next/image'
 
 // --- TEAM CONFIGURATION ---
 const DEVELOPERS = [
@@ -73,16 +74,17 @@ export default function Footer() {
           <div className="md:col-span-4 space-y-8">
             <Link href="/">
               <div className="flex items-center gap-2 group cursor-pointer">
-                <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-sm text-black shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+                {/* <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-sm text-black shadow-[0_0_15px_rgba(37,99,235,0.3)]">
                   <Terminal size={16} strokeWidth={3} />
-                </div>
+                </div> */}
                 <div className="flex flex-col">
-                  <span className="text-lg font-bold tracking-tight text-white leading-none">
+                  {/* <span className="text-lg font-bold tracking-tight text-white leading-none">
                     SKILLLAB
-                  </span>
-                  <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">
+                  </span> */}
+                  {/* <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">
                     Protocol Engineering
-                  </span>
+                  </span> */}
+                <Image src="/logos/rvcelogo.png" alt="Logo" width={50} height={40} className="group-hover:opacity-80 transition-opacity" />
                 </div>
               </div>
             </Link>
