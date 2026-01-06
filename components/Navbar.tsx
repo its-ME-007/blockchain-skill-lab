@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Menu, X, BookOpen, FileText, ChevronDown, Terminal } from 'lucide-react'
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -34,13 +35,19 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-sm text-black">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            {/* <div className="w-8 h-8 bg-blue-600 flex items-center justify-center rounded-sm text-black">
               <Terminal size={18} strokeWidth={3} />
+            </div> */}
+            <Image src="/logos/rvcelogo.png" alt="Logo" width={100} height={40} className="group-hover:opacity-80 transition-opacity" />
+            <div className="flex flex-col">
+              <span className="text-lg font-bold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
+                SKILLLAB
+              </span>
+              <span className="text-[9px] font-mono text-blue-500 uppercase tracking-wider hidden lg:block">
+                5-Day Blockchain Guide
+              </span>
             </div>
-            <span className="text-lg font-bold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
-              SKILLLAB
-            </span>
           </div>
         </Link>
 

@@ -19,8 +19,8 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Blockchain Skilllab',
-  description: 'Master blockchain fundamentals through a structured 5-day program covering distributed ledgers, cryptography, and modern platforms like Ethereum, Solana, and Algorand',
+  title: 'Blockchain Skilllab - 5-Day Guide to Get Started with Blockchain',
+  description: 'Your complete 5-day guide to getting started with blockchain development. Learn distributed ledgers, smart contracts, and build on Ethereum, Solana & Algorand from scratch.',
 }
 
 export default function RootLayout({

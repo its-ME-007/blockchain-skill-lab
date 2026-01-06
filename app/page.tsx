@@ -172,7 +172,7 @@ export default function Home() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-black/50 backdrop-blur-md border border-neutral-800 text-white text-xs font-mono tracking-widest uppercase mb-6 md:mb-8 shadow-lg shadow-blue-900/10 pointer-events-auto">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-sm animate-pulse"></span>
-              Cohort 2026 / Beta
+              5-Day Program • Cohort 2026
             </div>
 
             {/* Headline - Responsive sizing */}
@@ -185,7 +185,7 @@ export default function Home() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-neutral-300 mb-8 md:mb-10 max-w-lg leading-relaxed font-light drop-shadow-md mx-auto md:mx-0">
-              Master distributed ledgers, smart contracts, and high-performance consensus mechanisms. A rigorous technical path for the modern stack.
+              Your complete 5-day guide to mastering blockchain fundamentals. Learn distributed ledgers, smart contracts, and build on Ethereum, Solana & Algorand.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start justify-center md:justify-start pointer-events-auto pb-12 md:pb-0">
@@ -233,12 +233,12 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <div className="text-center md:text-left">
-              <h2 className="text-3xl font-bold tracking-tighter text-white mb-2">Technical Roadmap</h2>
-              <p className="text-neutral-500 font-mono text-sm">SEQUENCE_ID: 2024-V2</p>
+              <h2 className="text-3xl font-bold tracking-tighter text-white mb-2">Your 5-Day Journey</h2>
+              <p className="text-neutral-500 font-mono text-sm">From Zero to Blockchain Developer</p>
             </div>
             <div className="h-px bg-neutral-800 flex-1 mx-8 hidden md:block opacity-50"></div>
             <p className="text-neutral-400 text-sm max-w-xs text-center md:text-right mx-auto md:mx-0">
-              Execute modules in order to ensure dependency resolution.
+              A structured path to get you building on blockchain in just 5 days.
             </p>
           </motion.div>
 
