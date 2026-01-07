@@ -27,10 +27,12 @@ const DEVELOPERS = [
 
 const CONTRIBUTORS = [
   // Add actual contributor names here
-  { name: 'Kavin', role: 'Day 1' },
+  { name: 'Kavin', role: 'Day 1', url: 'https://github.com/Kavin4cK' },
   { name: 'Ishan', role: 'Day 2' },
   { name: 'Dia Arora', role: 'Day 3', url: 'https://github.com/Dia-Arora' },
-  { name: 'Varun', role: 'Day 4', url: 'https://github.com/varunaditya27'}
+  { name: 'Varun', role: 'Day 4', url: 'https://github.com/varunaditya27'},
+  { name: 'Chinmai', role: 'Day 3', url: 'https://github.com/ChinmaiShetti' },
+  { name: 'Krupanka', role: 'Day 4', url: 'https://github.com/Krupanka22' }
 ]
 
 // --- SUB-COMPONENTS ---
